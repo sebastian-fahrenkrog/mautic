@@ -14,15 +14,20 @@ $container->loadFromExtension("framework", array(
         "cache" => "apc"
     )
 ));
+*/
+
+// Speed up batch processing at the cost of CPU cycles.
+// By default Mautic sleeps 1 full second between batches.
+// We'll drop that down to 50ms.
+$container->setParameter('mautic.batch_sleep_time', .050);
 
 $container->loadFromExtension("doctrine", array(
     "orm" => array(
-        "metadata_cache_driver" => "apc",
-        "result_cache_driver"   => "apc",
-        "query_cache_driver"    => "apc"
+        "metadata_cache_driver" => "apcu",
+        "result_cache_driver"   => "apcu",
+        "query_cache_driver"    => "array"
     )
 ));
-*/
 
 $container->loadFromExtension('monolog', [
     'channels' => [
