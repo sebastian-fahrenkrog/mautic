@@ -30,6 +30,17 @@ class LeadListType extends AbstractType
 
                 $choices = [];
                 foreach ($lists as $l) {
+                    
+                    if ( isset($options['simple_segments_only']) && $options['simple_segments_only'] ) {
+
+                        $id = $l['id'];
+                        $filters = $listModel->getEntity($id)->getFilters();
+                        if( !empty($filters) )
+                        {
+                            continue;
+                        }
+                    }                    
+                    
                     if (empty($options['preference_center_only'])) {
                         $choices[$l['name']] = $l['id'];
                     } else {
