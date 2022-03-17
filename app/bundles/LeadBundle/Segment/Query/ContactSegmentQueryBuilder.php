@@ -1,14 +1,5 @@
 <?php
 
-/*
- * @copyright   2018 Mautic Contributors. All rights reserved
- * @author      Mautic
- *
- * @link        http://mautic.org
- *
- * @license     GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
- */
-
 namespace Mautic\LeadBundle\Segment\Query;
 
 use Doctrine\DBAL\Connection;
@@ -322,7 +313,8 @@ class ContactSegmentQueryBuilder
 
         foreach ($segmentFilters as $segmentFilter) {
             if (isset($segmentFilter['field']) && 'leadlist' === $segmentFilter['field']) {
-                $filterEdges  = $segmentFilter['filter'];
+                $bcFilter     = $segmentFilter['filter'] ?? [];
+                $filterEdges  = $segmentFilter['properties']['filter'] ?? $bcFilter;
                 $segmentEdges = array_merge($segmentEdges, $filterEdges);
             }
         }

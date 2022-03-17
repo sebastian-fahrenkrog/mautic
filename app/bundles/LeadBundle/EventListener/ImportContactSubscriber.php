@@ -2,15 +2,6 @@
 
 declare(strict_types=1);
 
-/*
- * @copyright   2019 Mautic Contributors. All rights reserved
- * @author      Mautic
- *
- * @link        http://mautic.org
- *
- * @license     GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
- */
-
 namespace Mautic\LeadBundle\EventListener;
 
 use Mautic\CoreBundle\Security\Permissions\CorePermissions;
@@ -77,7 +68,6 @@ final class ImportContactSubscriber implements EventSubscriberInterface
                 'lastActive'     => 'mautic.lead.import.label.lastActive',
                 'dateIdentified' => 'mautic.lead.import.label.dateIdentified',
                 'ip'             => 'mautic.lead.import.label.ip',
-                'points'         => 'mautic.lead.import.label.points',
                 'stage'          => 'mautic.lead.import.label.stage',
                 'doNotEmail'     => 'mautic.lead.import.label.doNotEmail',
                 'ownerusername'  => 'mautic.lead.import.label.ownerusername',
