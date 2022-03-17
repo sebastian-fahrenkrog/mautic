@@ -79,6 +79,7 @@ class LeadImportFieldType extends AbstractType
                     'list',
                     LeadListType::class,
                     [
+                        'simple_segments_only' => true,
                         'label'      => 'mautic.lead.lead.field.list',
                         'label_attr' => ['class' => 'control-label'],
                         'attr'       => [
