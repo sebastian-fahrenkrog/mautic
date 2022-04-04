@@ -51,6 +51,11 @@ class PublicController extends CommonFormController
                 $subject = $copy->getSubject();
                 $content = $copy->getBody();
 
+                if( $tokens['{dynamiccontent="Dynamic Content 1"}'] ) 
+                {
+                    $content = $tokens['{dynamiccontent="Dynamic Content 1"}'];
+                }                
+                
                 // Convert emoji
                 $content = EmojiHelper::toEmoji($content, 'short');
                 $subject = EmojiHelper::toEmoji($subject, 'short');
