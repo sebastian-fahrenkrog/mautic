@@ -1367,6 +1367,8 @@ class LeadController extends FormController
                 $email['from'] = $lead->getOwner()->getEmail();
             }
         }
+        $email['from'] = $this->get('mautic.helper.core_parameters')->getParameter('mailer_from_email');
+        $email['fromname'] = $this->get('mautic.helper.core_parameters')->getParameter('mailer_from_name');
 
         // Check if lead has a bounce status
         $dnc    = $this->getDoctrine()->getManager()->getRepository('MauticLeadBundle:DoNotContact')->getEntriesByLeadAndChannel($lead, 'email');
