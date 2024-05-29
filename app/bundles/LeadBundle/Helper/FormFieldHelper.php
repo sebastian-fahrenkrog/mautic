@@ -152,9 +152,9 @@ class FormFieldHelper extends AbstractFormFieldHelper
     public static function getCountryChoices()
     {
         $countryJson = file_get_contents(__DIR__.'/../../CoreBundle/Assets/json/countries.json');
-        $countries   = json_decode($countryJson);
+        $countries   = json_decode($countryJson, true);
 
-        return array_combine($countries, $countries);
+        return $countries;
     }
 
     /**
