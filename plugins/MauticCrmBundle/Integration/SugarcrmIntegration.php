@@ -1189,6 +1189,10 @@ class SugarcrmIntegration extends CrmAbstractIntegration
                     }
                 }
                 $createdLeadData = $this->getApiHelper()->createLead($mappedData[$object], $lead);
+                if(isset($createdLeadData[0]['id']))
+                {
+                    $createdLeadData = $createdLeadData[0];
+                }                
                 if (isset($createdLeadData['id'])) {
                     if (empty($integrationId)) {
                         $integrationEntity = new IntegrationEntity();
