@@ -54,7 +54,7 @@ if (!isset($lead)) {
 </style>
 
 <div id="mauticform_wrapper<?php echo $formName; ?>" class="mauticform_wrapper">
-    <form autocomplete="false" role="form" method="post" action="<?php echo  $action; ?>" id="mauticform<?php echo $formName; ?>" <?php if ($isAjax): ?> data-mautic-form="<?php echo ltrim($formName, '_'); ?>"<?php endif; ?> enctype="multipart/form-data" <?php echo $form->getFormAttributes(); ?>>
+    <form autocomplete="false" method="post" action="<?php echo  $action; ?>" id="mauticform<?php echo $formName; ?>" <?php if ($isAjax): ?> data-mautic-form="<?php echo ltrim($formName, '_'); ?>"<?php endif; ?> enctype="multipart/form-data" <?php echo $form->getFormAttributes(); ?>>
         <div class="mauticform-error" id="mauticform<?php echo $formName; ?>_error"></div>
         <div class="mauticform-message" id="mauticform<?php echo $formName; ?>_message"></div>
         <div class="mauticform-innerform">
