@@ -51,7 +51,12 @@ class PublicController extends CommonFormController
                 return $this->redirect($url, 301);
             }
 
-            if ($entity->isRemote()) {
+            // Use standard download for form source
+            $clickthrough = $this->request->get('ct');
+            if (!empty($clickthrough)) {
+                $clickthrough = $model->decodeArrayFromUrl($clickthrough);
+            }
+            if ($entity->isRemote() && (empty($clickthrough[0]) || $clickthrough[0] != 'form')) {
                 $model->trackDownload($entity, $this->request, 200);
 
                 // Redirect to remote URL
