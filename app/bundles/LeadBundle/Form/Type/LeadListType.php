@@ -29,7 +29,16 @@ class LeadListType extends AbstractType
                 $lists = (empty($options['preference_center_only'])) ? $lists : $this->segmentModel->getPreferenceCenterLists();
 
                 $choices = [];
-                foreach ($lists as $l) {
+                foreach ($lists as $l) {                    
+                    if ( isset($options['simple_segments_only']) && $options['simple_segments_only'] ) {
+
+                        $id = $l['id'];
+                        $filters = $this->segmentModel->getEntity($id)->getFilters();
+                        if( !empty($filters) )
+                        {
+                            continue;
+                        }
+                    }                                        
                     if (empty($options['preference_center_only'])) {
                         $choices[$l['name']] = $l['id'];
                     } else {
@@ -39,6 +48,7 @@ class LeadListType extends AbstractType
 
                 return $choices;
             },
+            'simple_segments_only'   => false,
             'global_only'            => false,
             'preference_center_only' => false,
             'required'               => false,
