@@ -109,7 +109,7 @@ if ('index' == $tmpl) {
                             'MauticCoreBundle:Helper:publishstatus_icon.html.php',
                             ['item' => $item, 'model' => 'dynamicContent']
                         ); ?>
-                        <a href="<?php echo $view['router']->url(
+                        <a href="<?php echo $view['router']->path(
                             'mautic_dynamicContent_action',
                             ['objectAction' => 'view', 'objectId' => $item->getId()]
                         ); ?>" data-toggle="ajax">
