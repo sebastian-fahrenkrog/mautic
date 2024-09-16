@@ -92,7 +92,10 @@ class QueueService
         unset($payload['mauticQueueName']);
         $eventName = "mautic.queue_{$queueName}";
 
-        $this->logger->debug('QUEUE: Consuming job for '.$queueName, $logPayload);
+        if(is_array($logPayload))
+        {
+            $this->logger->debug('QUEUE: Consuming job for '.$queueName, $logPayload);
+        }
 
         $event = new QueueConsumerEvent($payload);
         $this->eventDispatcher->dispatch($eventName, $event);
