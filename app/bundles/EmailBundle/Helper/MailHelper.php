@@ -1952,7 +1952,10 @@ class MailHelper
 
         if ($settings = $this->isMontoringEnabled('EmailBundle', 'bounces')) {
             // Append the bounce notation
-            [$email, $domain] = explode('@', $settings['address']);
+            //[$email, $domain] = explode('@', $settings['address']);
+            
+            $from = is_array( $this->from ) ? key( $this->from) : $this->from;
+            list($email, $domain) = explode('@', $from );            
             $email .= '+bounce';
             if ($idHash || $this->idHash) {
                 $email .= '_'.($idHash ?: $this->idHash);
