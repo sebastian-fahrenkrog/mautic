@@ -51,6 +51,37 @@ class PublicController extends CommonFormController
                 $subject = $copy->getSubject();
                 $content = $copy->getBody();
 
+                // PATCH Twig Problem: we need to render the twig email template again
+                $lead = $stat->getLead();
+                if($lead)
+                {
+                    //get email template
+                    $emailEntity = $stat->getEmail();
+
+                    //get html template 
+                    $content = $emailEntity->getCustomHtml();
+
+                    //get lead fields
+                    $fields = $lead->getProfileFields();
+
+                    //render twig email template 
+                    $event = new EmailSendEvent(
+                        null,
+                        [
+                            'content'      => $content,
+                            'email'        => $emailEntity,
+                            'idHash'       => $idHash,
+                            'tokens'       => $tokens,
+                            'internalSend' => true,
+                            'lead'         => $fields,
+                        ]
+                    );
+                    $this->dispatcher->dispatch(EmailEvents::EMAIL_ON_DISPLAY, $event);
+
+                    //replace content with twig content 
+                    $content = $event->getContent(true);
+                }                
+                
                 // Convert emoji
                 $content = EmojiHelper::toEmoji($content, 'short');
                 $subject = EmojiHelper::toEmoji($subject, 'short');
