@@ -80,9 +80,9 @@ echo $view->render('MauticFormBundle:Builder:script.html.php', ['form' => $form,
         },
         onErrorMark: function (data) {
             if (data.validationMessage) {
-                MauticFocusHandler('error', data.validationMessage);
+                //MauticFocusHandler('error', data.validationMessage);
 
-                return true;
+                //return true;
             }
         },
         onResponse: function (data) {
