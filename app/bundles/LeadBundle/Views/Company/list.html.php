@@ -176,7 +176,7 @@ if ('index' == $tmpl) {
                 'page'       => $page,
                 'limit'      => $limit,
                 'menuLinkId' => 'mautic_company_index',
-                'baseUrl'    => $view['router']->url('mautic_company_index'),
+                'baseUrl'    => $view['router']->path('mautic_company_index'),
                 'sessionVar' => 'company',
             ]
         ); ?>
