@@ -157,7 +157,7 @@ if ('index' == $tmpl) {
                     'page'       => $page,
                     'limit'      => $limit,
                     'menuLinkId' => 'mautic_dynamicContent_index',
-                    'baseUrl'    => $view['router']->url('mautic_dynamicContent_index'),
+                    'baseUrl'    => $view['router']->path('mautic_dynamicContent_index'),
                     'sessionVar' => 'dynamicContent',
                 ]
             ); ?>
