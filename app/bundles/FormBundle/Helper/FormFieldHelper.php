@@ -198,6 +198,13 @@ class FormFieldHelper extends AbstractFormFieldHelper
         $alias = $field->getAlias();
 
         switch ($field->getType()) {
+            case 'plugin.internationalphoneinput':
+                if (preg_match('/<input(.*?)id="mauticform_input_'.$formName.'_'.$alias.'"(.*?)value="(.*?)"(.*?)\/>/i', $formHtml, $match)) {
+                    $replace = '<input'.$match[1].'id="mauticform_input_'.$formName.'_'.$alias.'"'.$match[2].'value="'.$value.'"'
+                        .$match[4].'/>';
+                    $formHtml = str_replace($match[0], $replace, $formHtml);
+                }
+            break;            
             case 'text':
             case 'email':
             case 'hidden':
