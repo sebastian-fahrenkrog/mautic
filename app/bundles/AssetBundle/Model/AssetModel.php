@@ -448,7 +448,7 @@ class AssetModel extends FormModel
      *
      * @return array
      */
-    public function getLookupResults($type, $filter = '', $limit = 10)
+    public function getLookupResults($type, $filter = '', $limit = 999)
     {
         $results = [];
         switch ($type) {
