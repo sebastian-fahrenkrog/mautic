@@ -1155,7 +1155,7 @@ class SugarcrmIntegration extends CrmAbstractIntegration
             } //Do not push lead if it was already synched
         }
 
-        $fieldsToUpdateInSugar      = isset($config['update_mautic']) ? array_keys($config['update_mautic'], 0) : [];
+        $fieldsToUpdateInSugar      = isset($config['update_mautic']) ? array_keys($config['update_mautic']) : [];
         $leadSugarFieldsToCreate    = $this->cleanSugarData($config, array_keys($config['leadFields']), $object);
         $fieldsToUpdateInLeadsSugar = $this->cleanSugarData($config, $fieldsToUpdateInSugar, $object);
         $leadFields                 = array_intersect_key($leadSugarFieldsToCreate, $fieldsToUpdateInLeadsSugar);
