@@ -54,7 +54,7 @@ class AjaxController extends CommonAjaxController
             $stats                = $session->get('mautic.email.send.stats', ['sent' => 0, 'failed' => 0, 'failedRecipients' => []]);
             $inProgress           = $session->get('mautic.email.send.active', false);
 
-            if ($pending && !$inProgress && $entity->isPublished()) {
+            if ($pending && !$inProgress && $entity->isPublished() && !$entity->isBackgroundSending()) {
                 $session->set('mautic.email.send.active', true);
                 list($batchSentCount, $batchFailedCount, $batchFailedRecipients) = $model->sendEmailToLists($entity, null, $limit);
 

@@ -227,6 +227,17 @@ class Email extends FormEntity implements VariantEntityInterface, TranslationEnt
     }
 
     /**
+     * Is this email being sent in the background by mautic:broadcasts:send?
+     *
+     * Backport of mautic/mautic PR #11351. If true, sending from the browser must be
+     * blocked, otherwise cron and browser send to the same recipients (duplicate emails).
+     */
+    public function isBackgroundSending(): bool
+    {
+        return $this->isPublished() && !empty($this->getPublishUp()) && ($this->getPublishUp() < new \DateTime());
+    }
+
+    /**
      * Email constructor.
      */
     public function __construct()

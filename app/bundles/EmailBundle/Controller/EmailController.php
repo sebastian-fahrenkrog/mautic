@@ -1164,6 +1164,25 @@ class EmailController extends FormController
             );
         }
 
+        // Blocked while mautic:broadcasts:send is picking this email up - otherwise cron and
+        // browser send to the same recipients and contacts receive the email twice.
+        if ($entity->isBackgroundSending()) {
+            return $this->postActionRedirect(
+                array_merge(
+                    $postActionVars,
+                    [
+                        'flashes' => [
+                            [
+                                'type'   => 'error',
+                                'msg'    => 'mautic.email.send.disabled',
+                                'domain' => 'messages',
+                            ],
+                        ],
+                    ]
+                )
+            );
+        }
+
         if ('template' == $entity->getEmailType()
             || !$this->get('mautic.security')->hasEntityAccess(
                 'email:emails:viewown',
