@@ -117,8 +117,9 @@ if ('index' == $tmpl) {
                             $permissions['email:emails:editother'],
                             $item->getCreatedBy()
                         );
-                        $customButtons = ('list' == $type) ? [
-                            [
+                        $customButtons = [];
+                        if ('list' == $type) {
+                            $sendButton = [
                                 'attr' => [
                                     'data-toggle' => 'ajax',
                                     'href'        => $view['router']->path(
@@ -128,8 +129,16 @@ if ('index' == $tmpl) {
                                 ],
                                 'iconClass' => 'fa fa-send-o',
                                 'btnText'   => 'mautic.email.send',
-                            ],
-                        ] : [];
+                            ];
+
+                            if ($item->isBackgroundSending()) {
+                                $sendButton['attr']['href']     = 'javascript:void(0);';
+                                $sendButton['attr']['disabled'] = true;
+                                $sendButton['tooltip']          = 'mautic.email.send.disabled';
+                            }
+
+                            $customButtons[] = $sendButton;
+                        }
                         echo $view->render(
                             'MauticCoreBundle:Helper:list_actions.html.php',
                             [
